@@ -1,21 +1,62 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView, Platform, ScrollView } from "react-native";
+import PokemonCard from "./components/PokemonCard";
 
 export default function App() {
+  const pokemonData = [
+    {
+      name: "Charmander",
+      image: require("./assets/charmander.png"),
+      type: "Fire",
+      hp: 39,
+      moves: ["Scratch", "Ember", "Growl", "Leer"],
+      weaknesses: ["Water", "Rock"],
+    },
+    {
+      name: "Squirtle",
+      image: require("./assets/squirtle.png"), // Replace with the actual image path
+      type: "Water",
+      hp: 44,
+      moves: ["Tackle", "Water Gun", "Tail Whip", "Withdraw"],
+      weaknesses: ["Electric", "Grass"],
+    },
+    {
+      name: "Bulbasaur",
+      image: require("./assets/bulbasaur.png"), // Replace with the actual image path
+      type: "Grass",
+      hp: 45,
+      moves: ["Tackle", "Vine Whip", "Growl", "Leech Seed"],
+      weaknesses: ["Fire", "Ice", "Flying", "Psychic"],
+    },
+    {
+      name: "Pikachu",
+      image: require("./assets/pikachu.png"), // Replace with the actual image path
+      type: "Electric",
+      hp: 35,
+      moves: ["Quick Attack", "Thunderbolt", "Tail Whip", "Growl"],
+      weaknesses: ["Ground"],
+    },
+  ];
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+      {pokemonData.map((pokemon, index) => (
+        <PokemonCard key={index} 
+        name={pokemon.name} 
+        image={pokemon.image}
+        type={pokemon.type} 
+        hp={pokemon.hp}
+        moves={pokemon.moves}
+        weakness={pokemon.weaknesses}/>
+      ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#f5f5f5",
+    padding: Platform.OS === "android" ? 25 : 0,
   },
 });
